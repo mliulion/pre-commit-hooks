@@ -2,4 +2,3 @@
     name: Check for patterns using regex
     entry: check_pattern.py
     language: script
-    pass_filenames: false

@@ -23,7 +23,13 @@ _logger = logging.getLogger(__name__)
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Detect patterns to be blocked within staged files"
+        description="Detect patterns to be blocked within files"
+    )
+    parser.add_argument(
+        "filenames",
+        nargs="*",                  # pre-commit files
+        metavar="FILE",
+        help='File(s) to check',
     )
     parser.add_argument(
         "--target-name",
@@ -102,13 +108,7 @@ def main():
 
     whitelist = load_whitelist(args)
 
-    # Only staging files
-    result = subprocess.run(
-        ["git", "diff", "--cached", "--name-only"],
-        capture_output=True,
-        text=True,
-    )
-    files = result.stdout.strip().splitlines()
+    files = args.filenames
 
     _logger.debug("files")
     _logger.debug(files)
@@ -122,18 +122,15 @@ def main():
             content = open(filepath).read()
             for i, line in enumerate(content.splitlines(), 1):
                 for target_regex in target_list:
-
-                    _logger.debug("target_regex")
-                    _logger.debug(target_regex)
-
                     for match in target_regex.findall(line):
+
+                        _logger.debug("match")
+                        _logger.debug(match)
+
                         target_string = match if isinstance(match, str) else match[0]
 
-                        _logger.debug("target_string")
-                        _logger.debug(target_string)
-
                         if normalize_string(target_string) not in whitelist:
-                            print(f"{TARGET_NAME} '{target_string}' found using [{target_regex}] in '{filepath}:{i}' :\n\t{line.strip()}")
+                            print(f"{TARGET_NAME} '{target_string}' matched [{target_regex}] in '{filepath}:{i}' :\n\t{line.strip()}")
                             found = True
         except (UnicodeDecodeError, IsADirectoryError, FileNotFoundError):
             pass
