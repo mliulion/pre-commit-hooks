@@ -1,10 +1,22 @@
 #!/usr/bin/env python3
 
 import argparse
+import os
 import re
 import subprocess
 import sys
 import logging
+
+log_level = os.getenv("CHECK_PATTERN_LOG_LEVEL")
+
+log_level = log_level if (log_level in logging._nameToLevel) else logging.WARNING
+
+logging.basicConfig(
+    format="{asctime} {levelname:.1} {pathname}:{lineno} - {message}",
+    style="{",
+    level=log_level,
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
 
 _logger = logging.getLogger(__name__)
 
@@ -72,6 +84,8 @@ def load_target_list(args):
     return target_regex_list
 
 def main():
+
+    _logger.info("check_pattern!")
 
     args = parse_args()
 
