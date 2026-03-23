@@ -1,2 +1,3 @@
 -   id: check-ruts
     name: check for chilean ruts
+    entry: This is an entry
