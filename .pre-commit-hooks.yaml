@@ -1,4 +1,4 @@
 -   id: check-ruts
-    name: check for chilean ruts
-    entry: This is an entry
+    name: Check for chilean ruts
+    entry: check-ruts-hook
     language: python
