@@ -1,4 +1,4 @@
--   id: check-ruts
-    name: Check for chilean ruts
-    entry: check-ruts-hook
+-   id: check_pattern
+    name: Check for patterns using regex
+    entry: check_pattern.py
     language: python
