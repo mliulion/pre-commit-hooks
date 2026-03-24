@@ -1,0 +1,13 @@
+
+[project]
+name = "pre_commit_hooks"
+version = "v0.2.0"
+
+[project.optional-dependencies]
+dev = [
+    # buenas prácticas
+    'flake8',
+
+    # previene commit de info sensible
+    "pre-commit",
+]
