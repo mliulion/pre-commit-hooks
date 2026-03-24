@@ -1,13 +1,19 @@
-
 [project]
 name = "pre_commit_hooks"
 version = "v0.2.0"
 
 [project.optional-dependencies]
 dev = [
-    # buenas prácticas
-    'flake8',
-
-    # previene commit de info sensible
+    # previene commits de mala calidad
     "pre-commit",
+]
+
+[project.scripts]
+check_pattern = "check_pattern:main"
+check_secrets = "check_secrets:main"
+
+[tool.setuptools]
+py-modules = [
+    "check_pattern",
+    "check_secrets",
 ]

@@ -26,7 +26,7 @@ help:  ## Muestra esta ayuda
 
 
 # ============================================================
-#  INSTALL
+#  ENV
 # ============================================================
 
 .PHONY: install
@@ -64,3 +64,13 @@ clean-all: clean  ## Elimina también el virtualenv
 .PHONY: pre-commit
 pre-commit: install  ## Corre todos los hooks manualmente
 	$(BIN)/pre-commit run --all-files
+
+
+# ============================================================
+#  UTILS
+# ============================================================
+
+.PHONY: activate
+activate:  ## Muestra el comando para activar el virtual env
+	@echo 'Run:'
+	@echo 'source .venv/bin/activate'

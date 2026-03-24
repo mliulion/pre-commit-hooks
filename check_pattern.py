@@ -7,7 +7,12 @@ import os
 import re
 import sys
 
-log_level = os.getenv('CHECK_PATTERN_LOG_LEVEL')
+log_level_name = os.getenv('CHECK_PATTERN_LOG_LEVEL')
+log_level: int = (
+    logging._nameToLevel[log_level_name]
+    if log_level_name in logging._nameToLevel
+    else logging.WARNING
+)
 
 log_level = log_level if (
     log_level in logging._nameToLevel
@@ -64,7 +69,13 @@ def parse_args():
         metavar='FILE',
         help='File(s) to check',
     )
-    return parser.parse_args()
+
+    args, unknown = parser.parse_known_args()
+
+    if unknown:
+        print(f"Warning: unknown args: {unknown}")
+
+    return args
 
 
 def normalize_string(my_string: str) -> str:
@@ -102,6 +113,9 @@ def main():
 
     _logger.debug('args')
     _logger.debug(args)
+
+    # print('check_pattern args')
+    # print(args)
 
     TARGET_NAME = args.target_name if args.target_name else 'Target'
     IGNORE_FILE_LIST = args.ignore_file_list

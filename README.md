@@ -84,7 +84,7 @@ repos:
           - 'Local path'
 
           - "--target-regex-list"
-          - '(?:file://)?/home/.*'
+          - '(?:file://)?/HOME/.*'         # use lowercase
 
           - "--ignore_file_list"
           - ".pre-commit-config.yaml"

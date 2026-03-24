@@ -2,3 +2,7 @@
     name: Check for patterns using regex
     entry: check_pattern.py
     language: script
+-   id: check_secrets
+    name: Check for secrets from file(s)
+    entry: check_secrets
+    language: python
