@@ -37,6 +37,7 @@ $(VENV)/bin/activate: pyproject.toml
 	$(PYTHON) -m venv $(VENV)
 	$(PIP) install --upgrade pip -q
 	$(PIP) install -e ".[dev]" -q
+	$(BIN)/pre-commit install
 	@touch $(VENV)/bin/activate
 	@echo "$(GREEN)✓ Entorno listo$(RESET)"
 
@@ -52,6 +53,7 @@ clean:  ## Elimina artefactos de build, cache y cobertura
 
 .PHONY: clean-all
 clean-all: clean  ## Elimina también el virtualenv
+	$(BIN)/pre-commit uninstall  || true
 	rm -rf $(VENV)
 	@echo "$(GREEN)✓ Virtualenv eliminado$(RESET)"
 

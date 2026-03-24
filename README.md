@@ -95,7 +95,7 @@ repos:
 ---
 
 # See Also
-
+* [CONTRIBUTING.md](CONTRIBUTING.md)
 * [https://pre-commit.com/](https://pre-commit.com/)
 * [https://github.com/pre-commit/pre-commit](https://github.com/pre-commit/pre-commit)
 * [https://github.com/pre-commit/pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks)
